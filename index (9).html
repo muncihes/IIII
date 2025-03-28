@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+      <h1 class="title">Hello World! </h1>
+      <p id="currentTime"></p>
+      <script src="script.js"></script>
+  </body>
+</html><!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anket Sitesi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            color: white;
+        }
+        .button {
+            background: #0ff;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #0ff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background: #00ccff;
+        }
+        .ing-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .ing-modal-content {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .balance {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ME MONEY</h1>
+        <p>Boranın Bakiyesi: <span id="balanceAmount">$1567</span></p>
+        <a href="balance.html" class="button">Bakiye Görüntüle</a>
+        <a href="#" id="myIngButton" class="button">My ING</a> <!-- My ING butonu burada olacak -->
+        <a href="#" class="button">Hesabım</a> <!-- Hesabım butonu burada -->
+    </div>
+
+    <!-- My ING Modal -->
+    <div id="ingModal" class="ing-modal">
+        <div class="ing-modal-content">
+            <h2>My ING</h2>
+            <button id="startButton" class="button">Başla</button>
+            <p id="centAmount">Cent: 0</p>
+        </div>
+    </div>
+
+    <script>
+        // My ING sekmesine tıklandığında modalı göster
+        document.getElementById('myIngButton').onclick = function() {
+            document.getElementById('ingModal').style.display = 'flex';
+        };
+
+        // Başla butonuna tıklandığında kazı artışı başlasın
+        let cent = 0;
+        let interval;
+        let balance = 1567;
+        
+        document.getElementById('startButton').onclick = function() {
+            interval = setInterval(function() {
+                cent += 0.50; // Artış miktarı her defasında 0.50 cent olacak
+                document.getElementById('centAmount').innerText = 'Cent: ' + cent.toFixed(2);
+
+                // Bakiye güncelleme
+                balance += 0.005; // 0.50 cent artış için bakiye kısmı da güncellenir
+                document.getElementById('balanceAmount').innerText = '$' + balance.toFixed(2);
+            }, 1000); // Her 1000ms (1 saniye) arayla artış olacak
+        };
+    </script>
+</body>
+</html>
